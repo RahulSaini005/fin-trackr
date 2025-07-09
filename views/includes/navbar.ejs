@@ -1,0 +1,75 @@
+<nav>
+  <div class="logo">DhanWise</div>
+  <div class="nav-links">
+    <a href="/dashboard">Dashboard</a>
+    <a href="/transactions">Transactions</a>
+    <a href="/categories">Categories</a>
+    <a href="/report">Reports</a>
+    <a href="/reminders">Reminders</a>
+   <% if (session.userId) { %>
+  <a href="/auth/logout">Logout</a>
+<% } else { %>
+  <a href="/auth/login">Login</a>
+<% } %>
+   <a href="/auth/register">Register</a>
+  </div>
+</nav>
+
+
+
+
+
+<style>
+  nav {
+    background-color: black;
+    padding: 12px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+.logo {
+  font-family: 'Segoe UI', 'Poppins', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  background: linear-gradient(to right, #10b981, #3b82f6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.25);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.logo:hover {
+  transform: scale(1.05);
+}
+
+.logo .highlight {
+  font-weight: 500;
+  color: #ffffff;
+  -webkit-text-fill-color: white;
+  background: none;
+}
+
+  .nav-links a {
+    margin-left: 20px;
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+  }
+  .nav-links a:hover {
+    text-decoration: underline;
+  }
+  .add-btn {
+    margin-left: 20px;
+    background-color: white;
+    color: #2563eb;
+    padding: 6px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .add-btn:hover {
+    background-color: #f0f0f0;
+  }
+</style>

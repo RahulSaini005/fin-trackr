@@ -1,0 +1,197 @@
+<% layout('layout') -%>
+
+<div class="reminder-container">
+  <h2>🔔 Manage Reminders</h2>
+
+  <form method="POST" action="/reminders/add" class="reminder-form">
+    <input name="message" placeholder="Enter your reminder..." required />
+    <input type="datetime-local" name="time" required />
+    <button type="submit">➕ Add Reminder</button>
+  </form>
+
+  <hr>
+
+  <ul class="reminder-list">
+    <% reminders.forEach(r => { %>
+      <li class="reminder-item">
+        <div>
+          <strong><%= r.message %></strong>
+          <span>⏰ <%= new Date(r.time).toLocaleString() %></span>
+        </div>
+
+        <div class="reminder-actions">
+          <form action="/reminders/delete/<%= r._id %>" method="POST">
+            <button class="delete-btn">🗑️</button>
+          </form>
+
+          <form action="/reminders/update/<%= r._id %>" method="POST" class="update-form">
+            <input name="message" value="<%= r.message %>" required />
+            <input type="datetime-local" name="time" />
+            <button>💾</button>
+          </form>
+        </div>
+      </li>
+    <% }) %>
+  </ul>
+</div>
+
+<style>
+  .reminder-container {
+    width: 65%;
+    margin: 40px auto;
+    background:linear-gradient(to right, #f4f7fa, #dceeff); /* Light gray background */
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.20);
+    font-family: 'Segoe UI', sans-serif;
+       
+  }
+
+    .reminder-container:hover{
+       box-shadow: 0 10px 25px rgba(0, 0, 0, 0.60);
+    }
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+    color: #111827; /* Darker heading */
+  }
+
+  .reminder-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    justify-content: center;
+    margin-bottom: 30px;
+  }
+
+  .reminder-form input,
+  .update-form input {
+    flex: 1 1 300px;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #ffffff;
+    transition: border-color 0.2s ease;
+  }
+
+  .reminder-form input:focus,
+  .update-form input:focus {
+    border-color: #2563eb;
+    outline: none;
+  }
+
+  .reminder-form button {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .reminder-form button:hover {
+    background-color: #059669;
+  }
+
+  .reminder-list {
+    list-style-type: none;
+    padding: 0;
+  }
+    .reminder-list {
+    list-style-type: none;
+    padding: 0;
+    
+    /* 🔽 Scrolling behavior */
+    max-height: 300px;
+    overflow-y: auto;
+
+    /* Optional: Custom scrollbar for WebKit browsers */
+  }
+
+  .reminder-list::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  .reminder-list::-webkit-scrollbar-thumb {
+    background-color: #cbd5e1;
+    border-radius: 10px;
+  }
+
+  .reminder-list::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+
+  .reminder-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    background: #ffffff;
+    padding: 18px;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    margin-bottom: 14px;
+    gap: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .reminder-item strong {
+    font-size: 16px;
+    color: #111827;
+  }
+
+  .reminder-item span {
+    display: block;
+    color: #6b7280;
+    margin-top: 4px;
+    font-size: 14px;
+  }
+
+  .reminder-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .reminder-actions form {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .delete-btn {
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .delete-btn:hover {
+    background-color: #dc2626;
+  }
+
+  .update-form button {
+    background-color: #3b82f6;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  .update-form button:hover {
+    background-color: #2563eb;
+  }
+</style>

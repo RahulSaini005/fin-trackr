@@ -1,0 +1,110 @@
+<% layout('layout') -%>
+
+<div class="register-container">
+  <h2>Create an Account 📝</h2>
+  <p class="register-subtext">Join us by filling in the information below.</p>
+
+  <!-- ✅ Error Message Block -->
+<% if (typeof error !== 'undefined' && error) { %>
+  <div style="background-color: #f8d7da; color: #842029; padding: 12px; border-radius: 6px; text-align: center; margin-bottom: 20px; font-weight: 500;">
+    <%= error %>
+  </div>
+<% } %>
+
+
+  <!-- ✅ Registration Form -->
+  <form method="POST" action="/auth/register" class="register-form">
+    <label>
+      <span>Name</span>
+      <input type="text" name="name" placeholder="Your Name" required />
+    </label>
+
+    <label>
+      <span>Email</span>
+      <input type="email" name="email" placeholder="name@example.com" required />
+    </label>
+
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" placeholder="••••••••" required />
+    </label>
+
+    <button type="submit">Register</button>
+  </form>
+</div>
+
+<style>
+  .register-container {
+    width: 400px;
+    max-width: 90%;
+    margin: 80px auto;
+    background: linear-gradient(to right, #f4f7fa, #dceeff);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .register-container:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  }
+
+  .register-container h2 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 28px;
+    color: #111827;
+  }
+
+  .register-subtext {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+  .register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .register-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .register-form input {
+    margin-top: 6px;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .register-form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    outline: none;
+  }
+
+  .register-form button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+
+  .register-form button:hover {
+    background-color: #1d4ed8;
+  }
+</style>

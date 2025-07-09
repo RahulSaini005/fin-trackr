@@ -1,0 +1,114 @@
+<% layout('layout') -%>
+
+<div class="login-container">
+  <h2>Welcome Back 👋</h2>
+  <p class="login-subtext">Please enter your details to continue.</p>
+
+  <!-- ✅ Inline Error Message -->
+  <% if (typeof error !== 'undefined' && error) { %>
+    <div class="error-message"><%= error %></div>
+  <% } %>
+
+  <form method="POST" action="/auth/login" class="login-form">
+    <label>
+      <span>Email</span>
+      <input type="email" name="email" placeholder="john@example.com" required />
+    </label>
+
+    <label>
+      <span>Password</span>
+      <input type="password" name="password" placeholder="••••••••" required />
+    </label>
+
+    <button type="submit">Login</button>
+  </form>
+</div>
+
+<style>
+  .login-container {
+    width: 400px;
+    max-width: 90%;
+    margin: 80px auto;
+    background: linear-gradient(to right, #f4f7fa, #dceeff);
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    font-family: 'Segoe UI', sans-serif;
+    transition: box-shadow 0.3s ease;
+  }
+
+  .login-container:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  }
+
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 28px;
+    color: #111827;
+  }
+
+  .login-subtext {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 14px;
+    color: #6b7280;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .login-form label {
+    display: flex;
+    flex-direction: column;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  .login-form input {
+    margin-top: 6px;
+    padding: 12px 14px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    background: #ffffff;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .login-form input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+    outline: none;
+  }
+
+  .login-form button {
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+
+  .login-form button:hover {
+    background-color: #1d4ed8;
+  }
+
+  /* ✅ Error Message Styling */
+  .error-message {
+    background-color: #f8d7da;
+    color: #842029;
+    padding: 10px 14px;
+    border: 1px solid #f5c2c7;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+  }
+</style>
