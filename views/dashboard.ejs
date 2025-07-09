@@ -373,41 +373,67 @@ body {
   }
 }
 
-/* ==== RESPONSIVE DESIGN ==== */
+/* ==== RESPONSIVE DESIGN FOR PIE + LINE CHART DASHBOARD ==== */
 @media screen and (max-width: 768px) {
-  .main-section {
-    align-items: center;
-    text-align: center;
+
+  /* Pie Chart */
+  .chart {
+    position: static;
+    width: 90%;
+    margin: 0 auto;
+    padding: 10px;
   }
 
-  .name {
-    font-size: 1.5rem;
+  .chart h2 {
+    font-size: 1.2rem;
+    margin-top: 20px;
   }
 
-  .day, .date {
-    font-size: 1rem;
-  }
-
-  .chart-summary-wrapper {
+  /* Summary Cards */
+  .card-container {
     flex-direction: column;
     align-items: center;
-    gap: 30px;
-  }
-
-  .chart {
     width: 100%;
-  }
-
-  .card-container {
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-    flex-wrap: wrap;
+    top: 0;
+    margin-top: 20px;
   }
 
   .card-container > div {
-    width: 45%;
-    margin: 10px 0;
+    width: 90%;
+    text-align: center;
+  }
+
+  /* Line Chart Section */
+  .chartline {
+    position: static;
+    margin-top: 40px;
+  }
+
+  .chartline h2 {
+    font-size: 1.2rem;
+    padding: 0 10px;
+  }
+
+  /* Date Filter */
+  .date-filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    width: 90%;
+    margin: 0 auto 30px auto;
+    padding: 16px;
+    margin-left: 0;
+    gap: 15px;
+  }
+
+  .apply-btn {
+    width: 100%;
+    top: 0;
+  }
+
+  /* Chart Canvases */
+  canvas {
+    width: 100% !important;
+    height: auto !important;
   }
 }
 

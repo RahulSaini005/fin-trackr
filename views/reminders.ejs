@@ -194,4 +194,51 @@
   .update-form button:hover {
     background-color: #2563eb;
   }
+
+
+  @media (max-width: 768px) {
+  .reminder-container {
+    width: 90%;
+    padding: 20px;
+    margin: 20px auto;
+  }
+
+  .reminder-form input,
+  .update-form input {
+    flex: 1 1 100%;
+  }
+
+  .reminder-actions {
+    width: 100%;
+  }
+
+  .reminder-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reminder-actions form {
+    width: 100%;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .reminder-actions input {
+    width: 100%;
+  }
+
+  .reminder-actions button {
+    width: 100%;
+  }
+  
+  /* ✅ Ensures body is scrollable on mobile when content exceeds screen */
+  body {
+    overflow-y: auto;
+  }
+
+  html, body {
+    height: auto;
+  }
+}
+
 </style>

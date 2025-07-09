@@ -33,7 +33,7 @@
   position: fixed;
   top: 50px; /* Adjusted to leave space below navbar */
   left: 0px;
-  max-height: 623px;
+  max-height: 620px;
   overflow-y: auto;
   border: 1px solid #e5e7eb;
   z-index: 10;
@@ -151,13 +151,54 @@ body {
   font-family: 'Segoe UI', sans-serif;
 }
 
+
+@media screen and (max-width: 768px) {
+  .sidebar-container {
+    width: 100%;
+    position: static;
+    max-height: none;
+    margin-bottom: 20px;
+  }
+
+  #chartContainer {
+    position: static;
+    width: 100%;
+    padding: 16px;
+    margin-top: 10px;
+  }
+
+  .date-filter {
+    position: static !important;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 90%;
+    margin: 0 auto 20px auto;
+  }
+
+  .date-filter label,
+  .date-filter input,
+  .date-filter button {
+    font-size: 14px;
+    width: 100%;
+    text-align: left;
+  }
+
+  canvas {
+    width: 100% !important;
+    height: auto !important;
+  }
+}
+
+
 </style>
 
 <div id="chartContainer">
   <canvas id="categoryChart"></canvas>
 </div>
 
-<div style="position: absolute; top: 90px; left: 600px; display: flex; gap: 10px; align-items: center;">
+<div class="date-filter">
 
   <label for="from">From:</label>
   <input type="date" id="from">

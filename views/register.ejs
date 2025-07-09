@@ -107,4 +107,30 @@
   .register-form button:hover {
     background-color: #1d4ed8;
   }
+
+
+  @media (max-width: 768px) {
+  html, body {
+    height: 100%;
+    overflow-y: auto; /* ✅ Enables vertical scroll on mobile */
+  }
+
+  .register-container {
+    overflow-y: auto; /* ✅ Optional: allows scroll within container if it has fixed height */
+    max-height: 100vh; /* Optional: prevents overflowing beyond viewport */
+    padding-bottom: 40px; /* Prevents content from getting cut at bottom */
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  input, select, button, textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+}
+
 </style>

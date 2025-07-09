@@ -140,6 +140,50 @@
   box-shadow: 0 2px 6px rgba(30, 64, 175, 0.2);
 }
 
+@media (max-width: 768px) {
+  .main-wrapper {
+    padding: 20px 16px;
+  }
+
+  .filter-section {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .filter-section input {
+    width: 100%;
+  }
+
+  .filter-section button {
+    width: 100%;
+  }
+
+  .table-container {
+    max-height: 280px;
+    overflow-x: auto;
+  }
+
+  .summary {
+    font-size: 16px;
+    padding: 16px;
+    word-break: break-word;
+  }
+
+  .download-btn {
+    position: static;
+    margin-top: 20px;
+    width: 100%;
+  }
+
+  #excelBtn {
+    display: none;
+  }
+
+  table {
+    min-width: 600px;
+  }
+}
 
 
 </style>
@@ -183,16 +227,13 @@
   </div>
 
 
-  <div style="position: absolute;  top:550px;  left: 1200px;">
-<a id="excelBtn" class="btn" ></a>
-
-<button class="download-btn" onclick="downloadExcel()">⬇️ Download </button>
-
-<!-- Hidden anchor for download -->
-<a id="excelDownloadLink" ></a>
-
-
+  <div>
+  <a id="excelBtn" class="btn"></a>
+  <button class="download-btn" onclick="downloadExcel()">⬇️ Download</button>
+  <a id="excelDownloadLink"></a>
 </div>
+
+
 
 <script>
   function downloadExcel() {
