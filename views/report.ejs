@@ -251,15 +251,15 @@
 
 
 <script>
+
   function downloadExcel() {
     const from = document.getElementById("fromDate").value;
     const to = document.getElementById("toDate").value;
 
-    const link = document.getElementById("excelDownloadLink");
-    link.href = `/report/download-excel?from=${from}&to=${to}`;
-    link.setAttribute("download", "report.csv");
-    link.click();
+    window.location.href = `/report/download-excel?from=${from}&to=${to}`;
   }
+
+
 
 
   
