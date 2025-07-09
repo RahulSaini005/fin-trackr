@@ -180,14 +180,15 @@ body {
     padding-top: 30px;
   }
 
-
   .sidebar-container {
     width: 100%;
-    position: static;
-    max-height: none;
+    position: relative;         /* Changed from static */
+    max-height: 280px;          /* Fixed height for scroll */
+    overflow-y: auto;           /* Enable scrolling */
     margin-bottom: 20px;
+    padding-right: 10px;
+    -webkit-overflow-scrolling: touch; /* Smooth iOS scroll */
   }
-
   #chartContainer {
     position: static;
     width: 100%;
