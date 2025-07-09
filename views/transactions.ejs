@@ -45,7 +45,8 @@
 </div>
 
 <!-- TRANSACTIONS DISPLAY WITH SCROLL -->
-<div style="max-height: 550px; overflow-y: auto; margin: 40px; border: 1px solid #ddd; border-radius: 10px; background-color: #f5f5f5;">
+<div class="scrollable-transaction-wrapper">
+
   <div class="transactions-container">
     <% if (allTransaction.length === 0) { %>
       <div style="padding: 20px; font-size: 16px; font-weight: 500; color: #4b5563;">No transactions added yet.</div>
@@ -79,6 +80,17 @@
 </script>
 
 <style>
+
+
+.scrollable-transaction-wrapper {
+  margin: 40px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #f5f5f5;
+}
+
+
+
   .transactions-container {
     display: flex;
     flex-wrap: wrap;
@@ -219,6 +231,15 @@
   }
 
   @media (max-width: 768px) {
+
+    @media (max-width: 768px) {
+      
+  .scrollable-transaction-wrapper {
+    max-height: 60vh;
+    overflow-y: auto;
+  }
+
+
     .transactions-container {
       flex-direction: column;
       align-items: center;
@@ -232,5 +253,5 @@
     #addForm {
     height: 70vh; /* 👈 Reduced height only for mobile */
   }
-  
+
 </style>
