@@ -22,6 +22,7 @@
   .filter-section {
     display: flex;
     gap: 20px;
+    justify-content: space-between;
     margin-bottom: 30px;
     align-items: center;
     flex-wrap: wrap;
@@ -192,6 +193,7 @@
   <h2>📊 Transaction Report</h2>
 
   <div class="filter-section">
+  <div style="display: flex; gap: 20px; flex-wrap: wrap;">
     <label>
       From:
       <input type="date" id="fromDate">
@@ -202,6 +204,10 @@
     </label>
     <button onclick="updateReportTable()">🔍 Show</button>
   </div>
+
+  <button class="download-btn" onclick="downloadExcel()">⬇️ Download</button>
+</div>
+
 
   <div class="table-container">
     <table id="reportTable">
