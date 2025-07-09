@@ -24,6 +24,24 @@
 </div>
 
 <style>
+
+  .main-section {
+  margin-left: 300px; /* Leaves space for fixed sidebar */
+  padding: 20px;
+  padding-top: 60px;
+}
+
+/* Ensure spacing and alignment of date filter */
+.date-filter {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+  padding-left: 12px;
+}
+
+
 .sidebar-container {
   width: 270px;
   background: linear-gradient(to bottom, #ffffff, #f8fafc);
@@ -153,6 +171,14 @@ body {
 
 
 @media screen and (max-width: 768px) {
+
+  .main-section {
+    margin-left: 0;
+    padding: 10px;
+    padding-top: 30px;
+  }
+
+
   .sidebar-container {
     width: 100%;
     position: static;
@@ -194,17 +220,18 @@ body {
 
 </style>
 
-<div id="chartContainer">
-  <canvas id="categoryChart"></canvas>
-</div>
+<div class="main-section">
+  <div class="date-filter">
+    <label for="from">From:</label>
+    <input type="date" id="from">
+    <label for="to">To:</label>
+    <input type="date" id="to">
+    <button onclick="filterByDate()">Apply</button>
+  </div>
 
-<div class="date-filter">
-
-  <label for="from">From:</label>
-  <input type="date" id="from">
-  <label for="to">To:</label>
-  <input type="date" id="to">
-  <button onclick="filterByDate()">Apply</button>
+  <div id="chartContainer">
+    <canvas id="categoryChart"></canvas>
+  </div>
 </div>
 
 
