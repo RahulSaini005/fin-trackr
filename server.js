@@ -23,7 +23,7 @@ const authRoute = require('./routes/auth');
 
 
 // ✅ MongoDB URL
-const MONGO_URL = "mongodb+srv://RahulFinTrackr:RahulFinTrackr123%24@fintrackr.m4sjf7r.mongodb.net/?retryWrites=true&w=majority&appName=FinTrackr";
+const MONGO_URL = process.env.MONGO_URL;
 
 // ✅ Connect to MongoDB
 mongoose.connect(MONGO_URL)
@@ -42,7 +42,7 @@ app.use(methodOverride('_method'));
 
 
 const store=MongoStore.create({
- MONGO_URL :"mongodb+srv://RahulFinTrackr:RahulFinTrackr123%24@fintrackr.m4sjf7r.mongodb.net/?retryWrites=true&w=majority&appName=FinTrackr",
+ MONGO_URL :process.env.MONGO_URL,
  crypto:{
   secret:process.env.SESSION_SECRET
  },
