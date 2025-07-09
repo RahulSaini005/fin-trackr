@@ -169,6 +169,7 @@ body {
   background: #f1f5f9;
   font-family: 'Segoe UI', sans-serif;
   padding-bottom: 80px;
+    overflow-y: auto;
 }
 
 
@@ -180,9 +181,11 @@ body {
     padding-top: 30px;
     overflow-y: auto;         
       min-height: 100vh; 
+          overflow-y: visible; 
   }
 
   .sidebar-container {
+    top: 30px !important; 
     width: 100%;
     position: relative;         /* Changed from static */
     max-height: 280px;          /* Fixed height for scroll */
