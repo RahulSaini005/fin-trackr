@@ -140,10 +140,14 @@
   transform: scale(0.97);
   box-shadow: 0 2px 6px rgba(30, 64, 175, 0.2);
 }
-
 @media (max-width: 768px) {
+  body {
+    overflow-y: auto; /* allow vertical scroll */
+  }
+
   .main-wrapper {
     padding: 20px 16px;
+    overflow-y: auto;
   }
 
   .filter-section {
@@ -152,10 +156,7 @@
     gap: 12px;
   }
 
-  .filter-section input {
-    width: 100%;
-  }
-
+  .filter-section input,
   .filter-section button {
     width: 100%;
   }
@@ -169,12 +170,26 @@
     font-size: 16px;
     padding: 16px;
     word-break: break-word;
+    position: relative;
   }
 
   .download-btn {
-    position: static;
-    margin-top: 20px;
-    width: 100%;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: auto;
+    height: 35px;
+    font-size: 14px;
+    padding: 6px 16px;
+    z-index: 10;
+  }
+
+  .summary {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: relative;
+    padding-right: 120px; /* space for button */
   }
 
   #excelBtn {
@@ -185,6 +200,7 @@
     min-width: 600px;
   }
 }
+
 
 
 </style>
