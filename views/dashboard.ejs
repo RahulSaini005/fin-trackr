@@ -105,7 +105,7 @@
 
   <!-- 🔹 Chart Canvas -->
   <div style="width: 90%; max-width: 700px; margin: 0 auto;">
-    <canvas id="lineChart"></canvas>
+    <canvas id="financeChart"></canvas>
   </div>
 </div>
 
@@ -373,15 +373,13 @@ body {
   }
 }
 
-
 @media screen and (max-width: 768px) {
 
   /* Pie Chart Container */
   .chart {
     position: relative;
     width: 100%;
-    margin-left: 0;
-    padding: 0 0 20px 10px;
+    padding: 10px 10px 20px 10px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -395,21 +393,18 @@ body {
     padding-left: 5px;
   }
 
-  /* Only target financeChart size */
-  #financeChart {
+  /* ✅ Correct target for pie chart */
+  .chart canvas#financeChart {
     width: 160px !important;
     height: 160px !important;
+    display: block;
   }
-
-  /* DO NOT override all canvas elements */
-  /* Removed: global canvas styling */
 
   /* Summary Cards */
   .card-container {
     flex-direction: column;
     align-items: center;
     width: 100%;
-    top: 0;
     margin-top: 20px;
   }
 
@@ -458,6 +453,7 @@ body {
     top: 0;
   }
 }
+
 
 
 .date-filter-container {
