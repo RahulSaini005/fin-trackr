@@ -379,18 +379,18 @@ body {
   /* Pie Chart */
   .chart {
     position: relative;
-    width: 100%;                /* Take full width */
-    margin: 30px auto 0 auto;   /* Push it down with margin-top */
+   width: fit-content;          /* So it wraps tight around the canvas */
+    margin: 30px 0 0 10px;    /* Push it down with margin-top */
     padding: 10px;
     display: flex;
     flex-direction: column;
-    align-items: center;        /* Center the pie chart horizontally */
+  align-items: flex-start;        /* Center the pie chart horizontally */
   }
 
   .chart h2 {
     font-size: 1.2rem;
     margin: 10px 0 20px 0;
-    text-align: center;
+     text-align: left;     
   }
   /* Summary Cards */
   .card-container {
