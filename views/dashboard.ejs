@@ -377,15 +377,16 @@ body {
 @media screen and (max-width: 768px) {
 
   /* Pie Chart */
-  .chart {
-    position: relative;
-    width: 100%;                /* Take full width */
-    margin: 30px auto 0 auto;   /* Push it down with margin-top */
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;        /* Center the pie chart horizontally */
-  }
+.chart {
+  position: relative;
+  width: auto;
+  margin: 20px 10px 0 10px; /* Add some breathing room from left/right */
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;  /* Align to left side */
+}
+
 
   .chart h2 {
     font-size: 1.2rem;
@@ -459,17 +460,14 @@ body {
 
 
 
-  #financeChart{
-position: static;
-width:250px;
-height: 250px;
-left: 150px;
-    display: block;
-    box-sizing: border-box;
-top: 60px;
-size: 250px;
+#financeChart {
+  width: 180px !important;
+  height: 180px !important;
+  display: block;
+  margin-left: 0;      /* Stick to left */
+  margin-top: 10px;
+}
 
-  }
 
 }
 
