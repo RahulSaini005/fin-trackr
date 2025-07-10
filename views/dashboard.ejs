@@ -378,17 +378,21 @@ body {
 
   /* Pie Chart */
   .chart {
-    position: static;
-    width: 90%; /* reduced from 70% to 90% for full container control */
-    max-width: 300px; /* new: limit max width */
+     position: static;
+    width: 100%;
+    max-width: 250px; /* Reduced size for mobile */
     margin: 0 auto;
     padding: 10px;
-    transform: none; /* remove translateX */
+    transform: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Ensures perfect centering */
   }
 
   .chart h2 {
-    font-size: 1.2rem;
-    margin-top: 10px;
+ font-size: 1.2rem;
+    margin: 10px 0 20px 0;
+    text-align: center;
   }
 
   /* Summary Cards */
