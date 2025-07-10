@@ -377,23 +377,30 @@ body {
 @media screen and (max-width: 768px) {
 
   /* Pie Chart */
-  .chart {
-     position: static;
+  
+   .chart {
+    position: relative;
     width: 100%;
-    max-width: 150px; /* Reduced size for mobile */
-    margin: 0 auto;
-    padding: 10px;
-    transform: none;
+    max-width: 100%;
+    margin-left: 0; /* Shift chart to the left */
+    padding: 0 0 20px 10px;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Ensures perfect centering */
-        justify-content: center;
+    align-items: flex-start; /* Align content to left */
+    justify-content: center;
   }
 
-  .chart h2 {
- font-size: 1.2rem;
-    margin: 10px 0 20px 0;
-    text-align: center;
+   .chart h2 {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    text-align: left;
+    padding-left: 5px;
+  }
+
+
+  #financeChart {
+    width: 160px !important;
+    height: 160px !important;
   }
 
   /* Summary Cards */
