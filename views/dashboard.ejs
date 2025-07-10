@@ -378,20 +378,19 @@ body {
 
   /* Pie Chart */
   .chart {
-    position: relative;
-    width: 100%;                /* Take full width */
-    margin: 30px auto 0 auto;   /* Push it down with margin-top */
+    position: static;
+    width: 90%; /* reduced from 70% to 90% for full container control */
+    max-width: 300px; /* new: limit max width */
+    margin: 0 auto;
     padding: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;        /* Center the pie chart horizontally */
+    transform: none; /* remove translateX */
   }
 
   .chart h2 {
     font-size: 1.2rem;
-    margin: 10px 0 20px 0;
-    text-align: center;
+    margin-top: 10px;
   }
+
   /* Summary Cards */
   .card-container {
     flex-direction: column;
@@ -457,17 +456,6 @@ body {
     height: auto !important;
   }
 
-
-
-  #financeChart>.chart{
-position: static;
-width:250px;
-height: 250px;
-left:0px;
-top: 60px;
-size: 250px;
-
-  }
 
 }
 
