@@ -379,15 +379,16 @@ body {
   /* Pie Chart */
   .chart {
     position: static;
-    width: 70%;
+    width: 90%; /* reduced from 70% to 90% for full container control */
+    max-width: 300px; /* new: limit max width */
     margin: 0 auto;
     padding: 10px;
-    transform: translateX(-40px); 
+    transform: none; /* remove translateX */
   }
 
   .chart h2 {
     font-size: 1.2rem;
-    margin-top: 20px;
+    margin-top: 10px;
   }
 
   /* Summary Cards */
@@ -421,14 +422,14 @@ body {
 
   
   /* Date Filter */
-  .date-filter-container {
+   .date-filter-container {
     flex-direction: column;
     align-items: stretch;
     width: 95%;
     margin: 10px auto;
-    padding: 12px;
+    padding: 16px;
     display: flex;
-    gap: 10px;
+    gap: 12px;
   }
 
  .date-label {
@@ -464,13 +465,14 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
- margin-left:360px;
+  flex-wrap: wrap;
   gap: 20px;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto 30px auto;
   padding: 20px 30px;
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
   font-family: 'Poppins', sans-serif;
 }
 
