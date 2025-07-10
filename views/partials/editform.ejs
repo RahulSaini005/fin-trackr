@@ -104,20 +104,22 @@
 
   /* Mobile Responsive */
   @media (max-width: 768px) {
+    
     .edit-form-wrapper {
-      width: 90%;
-      margin: 20px auto;
-      height: 85vh;
-      overflow-y: auto;
-    }
-
+    width: 90%;
+    margin: 90px auto 60px;
+    max-height: calc(100vh - 160px);
+    overflow-y: auto;
+    padding: 24px 16px;
+    box-sizing: border-box;
+  }
 
      html, body {
     height: 100%;
     overflow-y: auto;
   }
 
-  
+
     .edit-form-wrapper::-webkit-scrollbar {
       width: 6px;
     }

@@ -379,9 +379,10 @@ body {
   /* Pie Chart */
   .chart {
     position: static;
-    width: 90%;
+    width: 70%;
     margin: 0 auto;
     padding: 10px;
+    transform: translateX(-10px); 
   }
 
   .chart h2 {
@@ -409,6 +410,11 @@ body {
     margin-top: 40px;
   }
 
+
+  #lineChart {
+  height: 320px !important; /* <-- Increased line chart height */
+}
+
   .chartline h2 {
     font-size: 1.2rem;
     padding: 0 10px;
@@ -432,8 +438,11 @@ body {
 
   /* Chart Canvases */
   canvas {
-    width: 100% !important;
-    height: auto !important;
+     width: 100% !important;
+  height: auto !important;
+  max-width: 250px; /* Controls actual pie size */
+  margin: 0 auto;
+  display: block;
   }
 }
 
