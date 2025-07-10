@@ -1,42 +1,123 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Edit Transaction</title>
-</head>
-<body>
+<% layout('layout') -%>
 
+<div class="edit-form-wrapper">
   <h2>Edit Transaction</h2>
 
-  <form action="/transactions/edit/<%= transaction._id %>?_method=PUT" method="POST">
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title" value="<%= transaction.title %>" required>
+  <form action="/transactions/edit/<%= transaction._id %>?_method=PUT" method="POST" class="edit-transaction-form">
+    <div class="edit-ele">
+      <label for="title">Title:</label>
+      <input type="text" id="title" name="title" value="<%= transaction.title %>" required>
+    </div>
 
-    <br><br>
+    <div class="edit-ele">
+      <label for="amount">Amount:</label>
+      <input type="number" id="amount" name="amount" value="<%= transaction.amount %>" required>
+    </div>
 
-    <label for="amount">Amount:</label>
-    <input type="number" id="amount" name="amount" value="<%= transaction.amount %>" required>
+    <div class="edit-ele">
+      <label for="type">Type:</label>
+      <select id="type" name="type" required>
+        <option value="income" <%= transaction.type === 'income' ? 'selected' : '' %>>Income</option>
+        <option value="expenses" <%= transaction.type === 'expenses' ? 'selected' : '' %>>Expenses</option>
+      </select>
+    </div>
 
-    <br><br>
+    <div class="edit-ele">
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" value="<%= transaction.date.toISOString().split('T')[0] %>" required>
+    </div>
 
-    <label for="type">Type:</label>
-    <select id="type" name="type" required>
-      <option value="income" <%= transaction.type === 'income' ? 'selected' : '' %>>Income</option>
-      <option value="expenses" <%= transaction.type === 'expenses' ? 'selected' : '' %>>Expenses</option>
-    </select>
-
-    <br><br>
-
-    <label for="date">Date:</label>
-    <input type="date" id="date" name="date" value="<%= transaction.date.toISOString().split('T')[0] %>" required>
-
-    <br><br>
-
-    <button type="submit">Update Transaction</button>
+    <div class="edit-ele-btn">
+      <button type="submit">Update Transaction</button>
+    </div>
   </form>
 
-  <br>
-  <a href="/transactions">⬅ Back to Transactions</a>
+  <div style="text-align:center; margin-top: 20px;">
+    <a href="/transactions" style="text-decoration:none; color:#2563eb;">⬅ Back to Transactions</a>
+  </div>
+</div>
 
-</body>
-</html>
+<style>
+  .edit-form-wrapper {
+    margin: 40px auto;
+    width: 50%;
+    background: linear-gradient(to right, #f9fbfd, #e3f0ff);
+    padding: 32px;
+    border-radius: 18px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  .edit-form-wrapper h2 {
+    text-align: center;
+    color: #1f2937;
+    margin-bottom: 28px;
+    font-size: 24px;
+  }
+
+  .edit-transaction-form {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+
+  .edit-ele label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #111827;
+  }
+
+  .edit-ele input,
+  .edit-ele select {
+    width: 100%;
+    padding: 12px;
+    font-size: 14px;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .edit-ele input:focus,
+  .edit-ele select:focus {
+    border-color: #2563eb;
+  }
+
+  .edit-ele-btn {
+    text-align: center;
+  }
+
+  .edit-ele-btn button {
+    background-color: #10b981;
+    color: white;
+    padding: 10px 28px;
+    font-size: 15px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.25s ease;
+  }
+
+  .edit-ele-btn button:hover {
+    background-color: #059669;
+  }
+
+  /* Mobile Responsive */
+  @media (max-width: 768px) {
+    .edit-form-wrapper {
+      width: 90%;
+      margin: 20px auto;
+      height: 85vh;
+      overflow-y: auto;
+    }
+
+    .edit-form-wrapper::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .edit-form-wrapper::-webkit-scrollbar-thumb {
+      background-color: #cbd5e0;
+      border-radius: 3px;
+    }
+  }
+</style>
