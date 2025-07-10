@@ -110,7 +110,7 @@
 </div>
 
 <!-- Chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 <script>
   const allTransactions = <%- JSON.stringify(transactions) %>;
@@ -212,6 +212,17 @@
   }
 
   setInterval(checkReminders, 60000); // check every 1 minute
+
+
+  window.addEventListener('DOMContentLoaded', () => {
+  // Render Pie Chart only when DOM is ready and data is available
+  if (transactions && transactions.length > 0) {
+    // render pie chart as you're doing
+  } else {
+    console.warn("No transaction data found for chart rendering.");
+  }
+});
+
 </script>
 
 
