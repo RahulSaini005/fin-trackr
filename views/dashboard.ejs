@@ -4,40 +4,219 @@
 <div class="main-section"></div>
 <div class="box">
   <h2 class="name">Welcome, <%= userName %>!</h2>
-  <div class="day" id="day"></div>
+  <div class="day" id="live-day"></div>
+  <div class="date" id="live-date"></div>
 </div>
 
-<!-- Cards Section -->
+<!-- Summary Cards -->
 <div class="card-container">
-  <div class="card income">
-    <h3>Income</h3>
-    <p>₹<%= totalIncome %></p>
-  </div>
-  <div class="card expense">
-    <h3>Expense</h3>
-    <p>₹<%= totalExpense %></p>
-  </div>
-  <div class="card balance">
-    <h3>Balance</h3>
-    <p>₹<%= totalBalance %></p>
-  </div>
+  <div class="income">Income: ₹<span id="incomeVal">0</span></div>
+  <div class="expense">Expense: ₹<span id="expenseVal">0</span></div>
+  <div class="savings">Savings: ₹<span id="savingsVal">0</span></div>
 </div>
 
-<!-- PIE CHART SECTION (Updated + Fixed) -->
+<!-- Income Pie Chart -->
 <div class="chart">
   <h2 style="text-align: center; margin-top: 40px;">Income Analytics</h2>
-  <div class="chart-canvas-wrapper"> <!-- ✅ Added for layout -->
+  <div style="width: 400px; margin: 0 auto;">
     <canvas id="financeChart"></canvas>
   </div>
 </div>
 
-<!-- LINE GRAPH -->
+<!-- Chart.js and jQuery -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Injected Transactions -->
+<script>
+  const transactions = <%- JSON.stringify(transactions) %>;
+</script>
+
+<!-- Live Date Script -->
+<script>
+  const now = new Date();
+  document.getElementById('live-day').innerText = now.toLocaleDateString('en-IN', { weekday: 'long' });
+  document.getElementById('live-date').innerText = now.toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' });
+</script>
+
+<!-- Dynamic Pie Chart Script -->
+<script>
+  let incomeTotal = 0;
+  let expenseTotal = 0;
+
+  transactions.forEach(tx => {
+    if (tx.type === 'income') incomeTotal += tx.amount;
+    else if (tx.type === 'expenses') expenseTotal += tx.amount;
+  });
+
+  const savingsTotal = incomeTotal - expenseTotal;
+
+  // Update Text Values
+  document.getElementById('incomeVal').textContent = incomeTotal;
+  document.getElementById('expenseVal').textContent = expenseTotal;
+  document.getElementById('savingsVal').textContent = savingsTotal;
+
+  // Pie Chart Update
+  const pieCtx = document.getElementById('financeChart').getContext('2d');
+  new Chart(pieCtx, {
+    type: 'pie',
+    data: {
+      labels: ['Income', 'Expense', 'Savings'],
+      datasets: [{
+        label: 'Monthly Overview',
+        data: [incomeTotal, expenseTotal, savingsTotal],
+        backgroundColor: [
+          'rgba(34, 197, 94, 0.8)',   // Income - Green
+          'rgba(239, 68, 68, 0.8)',   // Expense - Red
+          'rgba(59, 130, 246, 0.8)'   // Savings - Blue
+        ],
+        borderWidth: 1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: { position: 'bottom' }
+      }
+    }
+  });
+
+
+
+
+</script>
 <div class="chartline">
-  <h2 style="text-align: center;">Financial Progress</h2>
-  <canvas id="lineChart"></canvas>
+  <h2 style="text-align: center; margin-top: 30px;">📈 Income & Expense Trend</h2><br>
+
+  <!-- 🔹 Date Filter Form -->
+  <div class="date-filter-container " >
+  <label class="date-label">
+    From:
+    <input type="date" id="fromDate" class="date-input">
+  </label>
+
+  <label class="date-label">
+    To:
+    <input type="date" id="toDate" class="date-input">
+  </label>
+
+  <button onclick="filterChartByDate()" class="apply-btn">🎯 Apply</button>
 </div>
 
-<!-- STYLES -->
+  <!-- 🔹 Chart Canvas -->
+  <div style="width: 90%; max-width: 700px; margin: 0 auto;">
+    <canvas id="lineChart"></canvas>
+  </div>
+</div>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+  const allTransactions = <%- JSON.stringify(transactions) %>;
+  let lineChart;
+
+  function renderLineChart(filteredTransactions) {
+    const labels = filteredTransactions.map(tx =>
+      new Date(tx.date).toLocaleDateString('en-IN')
+    );
+
+    const incomeData = filteredTransactions.map(tx =>
+      tx.type === 'income' ? tx.amount : 0
+    );
+
+    const expenseData = filteredTransactions.map(tx =>
+      tx.type === 'expenses' ? tx.amount : 0
+    );
+
+    const ctx = document.getElementById('lineChart').getContext('2d');
+
+    if (lineChart) lineChart.destroy(); // Remove previous chart before rendering new one
+
+    lineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Income',
+            data: incomeData,
+            borderColor: 'green',
+            backgroundColor: 'rgba(34,197,94,0.2)',
+            tension: 0.3
+          },
+          {
+            label: 'Expenses',
+            data: expenseData,
+            borderColor: 'red',
+            backgroundColor: 'rgba(239,68,68,0.2)',
+            tension: 0.3
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  }
+
+  // Initial chart render
+  renderLineChart(allTransactions);
+
+  // On Apply Button Click
+  function filterChartByDate() {
+    const fromInput = document.getElementById('fromDate').value;
+    const toInput = document.getElementById('toDate').value;
+
+    if (!fromInput || !toInput) {
+      alert('Please select both From and To dates.');
+      return;
+    }
+
+    const fromDate = new Date(fromInput);
+    const toDate = new Date(toInput);
+    toDate.setHours(23, 59, 59, 999); // Include entire 'to' day
+
+    const filtered = allTransactions.filter(tx => {
+      const txDate = new Date(tx.date);
+      return txDate >= fromDate && txDate <= toDate;
+    });
+
+    renderLineChart(filtered);
+  }
+</script>
+
+
+
+<script>
+  function checkReminders() {
+    fetch('/reminders/check')
+      .then(res => res.json())
+      .then(reminders => {
+        reminders.forEach(r => {
+          const toast = document.createElement("div");
+          toast.className = "toast";
+          toast.innerText = "🔔 " + r.message;
+          document.body.appendChild(toast);
+
+          setTimeout(() => toast.remove(), 5000); // Remove after 5 sec
+        });
+      })
+      .catch(err => console.error('Reminder Check Failed:', err));
+  }
+
+  setInterval(checkReminders, 60000); // check every 1 minute
+</script>
+
+
+
+
 <style>
 /* ==== BASE STYLING ==== */
 body {
@@ -51,79 +230,75 @@ body {
   overflow-y: auto;
 }
 
+/* ==== MAIN SECTION (Welcome) ==== */
 .main-section {
-  height: 20px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background: linear-gradient(120deg, #3b82f6, #6366f1);
+  color: white;
+  border-radius: 0 0 24px 24px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  animation: fadeInSlide 1.2s ease forwards;
+  
 }
 
-.box {
-  text-align: center;
-  margin-bottom: 10px;
+.main-section:hover{
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+     transition: transform 0.2s ease, box-shadow 0.4s ease;
 }
 
 .name {
   font-size: 2rem;
   font-weight: 600;
-  color: #1e293b;
+  margin-bottom: 0.5rem;
+  animation: fadeInUp 1.5s ease forwards;
 }
 
-.day {
-  font-size: 1.2rem;
-  color: #475569;
+.day, .date {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin: 0.2rem 0;
+  animation: fadeInUp 1.8s ease forwards;
 }
 
-/* ==== CARD CONTAINER ==== */
-.card-container {
-  display: flex;
-  justify-content: center;
-  gap: 20px;
-  margin-top: 20px;
-  margin-bottom: 40px;
-}
-
-.card {
+/* ==== BOX CONTAINER ==== */
+.box {
+  max-width: 1100px;
+  margin: 2rem auto;
+  padding: 2rem;
   background-color: #ffffff;
-  padding: 20px 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  min-width: 160px;
+  border-radius: 16px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  animation: fadeInSlide 1.4s ease forwards;
+     transition: transform 0.2s ease, box-shadow 0.4s ease;
 }
 
-.card h3 {
-  margin: 0;
-  font-size: 1.2rem;
-  color: #1e293b;
+.box:hover{
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4);
 }
 
-.card p {
-  margin: 5px 0 0;
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-.income {
-  border-left: 6px solid #22c55e;
-}
-
-.expense {
-  border-left: 6px solid #ef4444;
-}
-
-.balance {
-  border-left: 6px solid #3b82f6;
-}
-
-/* ==== PIE CHART FIXED ==== */
-.chart {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto;
-  padding: 20px;
-  transition: all 0.3s ease;
+/* ==== PIE CHART + CARDS WRAPPER ==== */
+.chart-summary-wrapper {
   display: flex;
-  flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: flex-start;
+  gap: 50px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+  margin-bottom: 60px;
+}
+
+/* ==== PIE CHART ==== */
+.chart {
+  position: relative;
+  bottom: 180px;
+  left: 500px;
+  width: 400px;
+  padding: 20px;
+
+  transition: all 0.3s ease;
 }
 
 .chart h2 {
@@ -132,32 +307,100 @@ body {
   margin-bottom: 1rem;
 }
 
-.chart-canvas-wrapper {
-  width: 100%;
+/* ==== SUMMARY CARDS ==== */
+.card-container {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  width: 220px;
+  position: relative;
+  top: 200px;
 }
 
-#financeChart {
-  max-width: 100%;
-  height: auto;
+.card-container > div {
+  background-color: #f9fafb;
+  border-left: 6px solid #3b82f6;
+  padding: 18px 22px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #1f2937;
+  transition: all 0.3s ease;
 }
 
-/* ==== LINE CHART ==== */
-.chartline {
-  margin: 40px auto;
-  width: 90%;
-  max-width: 900px;
+.card-container > div:hover {
+  transform: translateY(-4px);
+  background-color: #eef4ff;
+  border-color: #6366f1;
 }
 
-.chartline h2 {
-  text-align: center;
-  margin-bottom: 20px;
+/* ==== LINE CHART CONTAINER (Adjust if needed) ==== */
+.line-chart-section {
+  margin-top: 40px;
+  padding: 1rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
 }
 
-/* ==== MEDIA QUERIES ==== */
+
+.chartline{
+  position: relative;
+  bottom: 50px;
+}
+
+/* ==== ANIMATIONS ==== */
+@keyframes fadeInUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInSlide {
+  from {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* ==== RESPONSIVE DESIGN FOR PIE + LINE CHART DASHBOARD ==== */
 @media screen and (max-width: 768px) {
+
+  /* Pie Chart */
+  
+   .chart {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0; /* Shift chart to the left */
+    padding: 0 0 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* Align content to left */
+    justify-content: center;
+  }
+
+   .chart h2 {
+    font-size: 1.1rem;
+    margin: 8px 0;
+    text-align: left;
+    padding-left: 5px;
+  }
+
+
+  
+
+  /* Summary Cards */
   .card-container {
     flex-direction: column;
     align-items: center;
@@ -171,32 +414,124 @@ body {
     text-align: center;
   }
 
-  .chart {
+  /* Line Chart Section */
+  .chartline {
     position: static;
-    width: 100%;
-    padding: 0 10px 20px 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+   margin-top: 10px; /* reduced spacing */
+    margin-bottom: 20px; 
   }
 
-  .chart h2 {
+
+
+  .chartline h2 {
     font-size: 1.2rem;
-    margin-top: 12px;
+    padding: 0 10px;
     margin-bottom: 10px;
-    text-align: center;
   }
 
-  #financeChart {
+  
+  /* Date Filter */
+   .date-filter-container {
+    flex-direction: column;
+    align-items: stretch;
+    width: 95%;
+    margin: 10px auto;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+  }
+
+ .date-label {
+    font-size: 13px;
+  }
+
+  .date-input {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+
+  .apply-btn {
+    width: 100%;
+        padding: 10px;
+    font-size: 13px;
+    top: 0;
+  }
+
+  /* Chart Canvases */
+  canvas {
     width: 100% !important;
+    max-width: 100% !important;
     height: auto !important;
   }
 
-  .chartline {
-    position: static;
-    margin-top: 10px;
-    margin-bottom: 20px;
-  }
+
 }
+
+
+
+.date-filter-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  max-width: 800px;
+  width: 100%;
+  margin: 20px auto 30px auto;
+  padding: 20px 30px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+
+.date-filter-container:hover{
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease, box-shadow 0.10s ease;
+}
+
+.date-label {
+  font-weight: 500;
+  color: #1e293b;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.date-input {
+  margin-top: 6px;
+  padding: 8px 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+}
+
+.date-input:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.apply-btn {
+  position: relative;
+  top:10px;
+  padding: 10px 20px;
+  background: linear-gradient(to right, #2563eb, #3b82f6);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.apply-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 16px rgba(59, 130, 246, 0.3);
+}
+
+
 </style>
