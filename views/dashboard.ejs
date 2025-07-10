@@ -382,7 +382,7 @@ body {
     width: 70%;
     margin: 0 auto;
     padding: 10px;
-    transform: translateX(-10px); 
+    transform: translateX(-40px); 
   }
 
   .chart h2 {
@@ -407,43 +407,55 @@ body {
   /* Line Chart Section */
   .chartline {
     position: static;
-    margin-top: 40px;
+   margin-top: 10px; /* reduced spacing */
+    margin-bottom: 20px; 
   }
 
 
-  #lineChart {
-  height: 320px !important; /* <-- Increased line chart height */
-}
 
   .chartline h2 {
     font-size: 1.2rem;
     padding: 0 10px;
+    margin-bottom: 10px;
   }
 
+  
   /* Date Filter */
   .date-filter-container {
     flex-direction: column;
     align-items: stretch;
-    width: 90%;
-    margin: 0 auto 30px auto;
-    padding: 16px;
-    margin-left: 0;
-    gap: 15px;
+    width: 95%;
+    margin: 10px auto;
+    padding: 12px;
+    display: flex;
+    gap: 10px;
   }
+
+ .date-label {
+    font-size: 13px;
+  }
+
+  .date-input {
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
 
   .apply-btn {
     width: 100%;
+        padding: 10px;
+    font-size: 13px;
     top: 0;
   }
 
   /* Chart Canvases */
   canvas {
-     width: 100% !important;
-  height: auto !important;
-  max-width: 250px; /* Controls actual pie size */
-  margin: 0 auto;
-  display: block;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
   }
+
+
 }
 
 
