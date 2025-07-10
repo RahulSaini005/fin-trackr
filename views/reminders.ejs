@@ -198,11 +198,12 @@
 
   @media (max-width: 768px) {
   .reminder-container {
-    width: 90%;
-    padding: 20px;
-    margin: 20px auto;
-      max-height: 90vh;
+      width: 90%;
+  height: 100vh;
   overflow-y: auto;
+  padding: 20px;
+  margin: 0 auto;
+  box-sizing: border-box
   }
 
   .reminder-form input,
@@ -239,8 +240,19 @@
   }
 
   html, body {
-    height: auto;
+    height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; 
   }
+
+
+  .reminder-list {
+  max-height: none;
+  overflow-y: visible;
 }
+}
+
+
 
 </style>
