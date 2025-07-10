@@ -373,35 +373,36 @@ body {
   }
 }
 
-/* ==== RESPONSIVE DESIGN FOR PIE + LINE CHART DASHBOARD ==== */
+
 @media screen and (max-width: 768px) {
 
-  /* Pie Chart */
-  
-   .chart {
+  /* Pie Chart Container */
+  .chart {
     position: relative;
     width: 100%;
-    max-width: 100%;
-    margin-left: 0; /* Shift chart to the left */
+    margin-left: 0;
     padding: 0 0 20px 10px;
     display: flex;
     flex-direction: column;
-    align-items: flex-start; /* Align content to left */
+    align-items: flex-start;
     justify-content: center;
   }
 
-   .chart h2 {
+  .chart h2 {
     font-size: 1.1rem;
     margin: 8px 0;
     text-align: left;
     padding-left: 5px;
   }
 
-
+  /* Only target financeChart size */
   #financeChart {
     width: 160px !important;
     height: 160px !important;
   }
+
+  /* DO NOT override all canvas elements */
+  /* Removed: global canvas styling */
 
   /* Summary Cards */
   .card-container {
@@ -420,11 +421,9 @@ body {
   /* Line Chart Section */
   .chartline {
     position: static;
-   margin-top: 10px; /* reduced spacing */
-    margin-bottom: 20px; 
+    margin-top: 10px;
+    margin-bottom: 20px;
   }
-
-
 
   .chartline h2 {
     font-size: 1.2rem;
@@ -432,9 +431,8 @@ body {
     margin-bottom: 10px;
   }
 
-  
   /* Date Filter */
-   .date-filter-container {
+  .date-filter-container {
     flex-direction: column;
     align-items: stretch;
     width: 95%;
@@ -444,7 +442,7 @@ body {
     gap: 12px;
   }
 
- .date-label {
+  .date-label {
     font-size: 13px;
   }
 
@@ -453,24 +451,13 @@ body {
     padding: 8px 10px;
   }
 
-
   .apply-btn {
     width: 100%;
-        padding: 10px;
+    padding: 10px;
     font-size: 13px;
     top: 0;
   }
-
-  /* Chart Canvases */
-  canvas {
-    width: 100% !important;
-    max-width: 100% !important;
-    height: auto !important;
-  }
-
-
 }
-
 
 
 .date-filter-container {
